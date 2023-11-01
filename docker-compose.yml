@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  postgres:
+    container_name: security
+    image: library/postgres
+    environment:
+      POSTGRES_DB: security_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+
+    ports:
+      - "5432:5432"
