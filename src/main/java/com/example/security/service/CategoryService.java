@@ -2,14 +2,12 @@ package com.example.security.service;
 
 import com.example.security.dto.request.CategoryRequestDto;
 import com.example.security.dto.response.CategoryResponseDto;
-import com.example.security.mapper.CategoryMapper;
 import com.example.security.entity.Category;
+import com.example.security.mapper.CategoryMapper;
 import com.example.security.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.ArrayList;
 import java.util.List;

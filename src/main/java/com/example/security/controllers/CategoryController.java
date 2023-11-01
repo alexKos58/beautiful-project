@@ -1,7 +1,6 @@
 package com.example.security.controllers;
 
 import com.example.security.dto.request.CategoryRequestDto;
-import com.example.security.dto.request.ProductRequestDto;
 import com.example.security.dto.response.CategoryResponseDto;
 import com.example.security.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,14 +32,14 @@ public class CategoryController {
     @GetMapping()
     @Operation(summary = "Получение списка категорий")
     @ResponseStatus(HttpStatus.OK)
-    public List<CategoryResponseDto> getListOfCategories(){
+    public List<CategoryResponseDto> getListOfCategories() {
         return categoryService.findAll();
     }
 
     @PostMapping("/base-categories")
     @Operation(summary = "Добавление базовых категорий в БД")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addBaseCategories(){
+    public void addBaseCategories() {
         categoryService.createCategories();
     }
 
@@ -48,7 +47,7 @@ public class CategoryController {
     @Operation(summary = "Добавить категорию товара")
     @ResponseStatus(HttpStatus.CREATED)
     public CategoryResponseDto addCategory(
-            @Parameter(description = "Добавляемая категория") @Valid @RequestBody CategoryRequestDto requestDto){
+            @Parameter(description = "Добавляемая категория") @Valid @RequestBody CategoryRequestDto requestDto) {
         return categoryService.addCategory(requestDto);
     }
 
@@ -56,7 +55,7 @@ public class CategoryController {
     @Operation(summary = "Найти категорию товара по имени")
     @ResponseStatus(HttpStatus.FOUND)
     public CategoryResponseDto findCategory(
-            @Parameter(in = ParameterIn.PATH, name = "name", description = "Наименование категории") @PathVariable String name){
+            @Parameter(in = ParameterIn.PATH, name = "name", description = "Наименование категории") @PathVariable String name) {
         return categoryService.findCategory(name);
     }
 
@@ -64,7 +63,7 @@ public class CategoryController {
     @Operation(summary = "Удалить категорию")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategory(
-            @Parameter(in = ParameterIn.PATH, name = "id", description = "Идентификатор категории") @PathVariable int id){
+            @Parameter(in = ParameterIn.PATH, name = "id", description = "Идентификатор категории") @PathVariable int id) {
         categoryService.deleteCategory(id);
     }
 }

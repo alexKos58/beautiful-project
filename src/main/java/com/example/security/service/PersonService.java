@@ -56,7 +56,7 @@ public class PersonService {
     }
 
     @Transactional
-    public List<PersonResponseDto> getAll(){
+    public List<PersonResponseDto> getAll() {
         return personMapper.responseList(personRepository.findAll());
     }
 
