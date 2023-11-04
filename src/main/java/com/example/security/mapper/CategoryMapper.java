@@ -1,8 +1,8 @@
 package com.example.security.mapper;
 
-import com.example.security.dto.request.CategoryRequestDto;
-import com.example.security.dto.response.CategoryResponseDto;
-import com.example.security.entity.Category;
+import com.example.security.controller.dto.request.CategoryRequestDto;
+import com.example.security.controller.dto.response.CategoryResponseDto;
+import com.example.security.domain.entity.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

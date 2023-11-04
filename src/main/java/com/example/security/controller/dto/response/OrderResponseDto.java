@@ -1,6 +1,6 @@
-package com.example.security.dto.response;
+package com.example.security.controller.dto.response;
 
-import com.example.security.enums.Status;
+import com.example.security.domain.enums.Status;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

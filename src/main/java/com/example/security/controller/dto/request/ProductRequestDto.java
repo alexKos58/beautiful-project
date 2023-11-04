@@ -1,4 +1,4 @@
-package com.example.security.dto.response;
+package com.example.security.controller.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -7,13 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductResponseDto {
-
-    @Schema(description = "Id товара")
-    private int productId;
+@Builder
+public class ProductRequestDto {
 
     @Schema(description = "Наименование товара")
     private String productTitle;

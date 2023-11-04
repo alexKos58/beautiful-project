@@ -1,7 +1,7 @@
-package com.example.security.controllers;
+package com.example.security.controller;
 
-import com.example.security.dto.request.CategoryRequestDto;
-import com.example.security.dto.response.CategoryResponseDto;
+import com.example.security.controller.dto.request.CategoryRequestDto;
+import com.example.security.controller.dto.response.CategoryResponseDto;
 import com.example.security.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,13 +23,13 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/category")
+@RequestMapping("${myapp.api.base-url}/category")
 @Tag(name = "Контроллер категорий", description = "Работают все эндпоинты")
 public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping()
+    @GetMapping
     @Operation(summary = "Получение списка категорий")
     @ResponseStatus(HttpStatus.OK)
     public List<CategoryResponseDto> getListOfCategories() {

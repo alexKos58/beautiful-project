@@ -1,6 +1,6 @@
-package com.example.security.entity;
+package com.example.security.domain.entity;
 
-import com.example.security.enums.Status;
+import com.example.security.domain.enums.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

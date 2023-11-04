@@ -1,7 +1,7 @@
-package com.example.security.controllers;
+package com.example.security.controller;
 
-import com.example.security.dto.request.ProductRequestDto;
-import com.example.security.dto.response.ProductResponseDto;
+import com.example.security.controller.dto.request.ProductRequestDto;
+import com.example.security.controller.dto.response.ProductResponseDto;
 import com.example.security.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -24,12 +24,12 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/product")
+@RequestMapping("${myapp.api.base-url}/product")
 @Tag(name = "Контроллер продуктов", description = "Работают все эндпоинты")
 public class ProductController {
     private final ProductService productService;
 
-    @GetMapping()
+    @GetMapping
     @Operation(summary = "Получение списка продуктов")
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponseDto> getAllProducts() {

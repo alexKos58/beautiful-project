@@ -1,6 +1,6 @@
-package com.example.security.entity;
+package com.example.security.domain.entity;
 
-import com.example.security.enums.Role;
+import com.example.security.domain.enums.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

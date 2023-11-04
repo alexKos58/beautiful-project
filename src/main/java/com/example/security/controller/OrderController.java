@@ -1,8 +1,9 @@
-package com.example.security.controllers;
+package com.example.security.controller;
 
-import com.example.security.dto.response.OrderResponseDto;
-import com.example.security.enums.Status;
+import com.example.security.controller.dto.response.OrderResponseDto;
+import com.example.security.domain.enums.Status;
 import com.example.security.service.OrderService;
+import com.example.security.service.impl.OrderServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/order")
+@RequestMapping("${myapp.api.base-url}/order")
 @Tag(name = "Контроллер заказов", description = "Работают все эндпоинты")
 public class OrderController {
     private final OrderService orderService;

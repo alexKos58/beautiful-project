@@ -1,8 +1,8 @@
 package com.example.security.mapper;
 
-import com.example.security.dto.request.ProductRequestDto;
-import com.example.security.dto.response.ProductResponseDto;
-import com.example.security.entity.Product;
+import com.example.security.controller.dto.request.ProductRequestDto;
+import com.example.security.controller.dto.response.ProductResponseDto;
+import com.example.security.domain.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

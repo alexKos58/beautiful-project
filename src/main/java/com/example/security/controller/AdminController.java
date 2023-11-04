@@ -1,6 +1,6 @@
-package com.example.security.controllers;
+package com.example.security.controller;
 
-import com.example.security.dto.response.PersonResponseDto;
+import com.example.security.controller.dto.response.PersonResponseDto;
 import com.example.security.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,13 +19,13 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/person")
+@RequestMapping("${myapp.api.base-url}/person")
 @Tag(name = "Контроллер админа", description = "Работают все эндпоинты")
 public class AdminController {
 
     private final PersonService personService;
 
-    @GetMapping()
+    @GetMapping
     @Operation(summary = "Получение списка пользователей")
     @ResponseStatus(HttpStatus.OK)
     public List<PersonResponseDto> getPersons() {

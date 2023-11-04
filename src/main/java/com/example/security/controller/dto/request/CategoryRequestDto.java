@@ -1,4 +1,4 @@
-package com.example.security.dto.request;
+package com.example.security.controller.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
