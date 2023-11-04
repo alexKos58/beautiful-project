@@ -14,3 +14,16 @@ spring:
       ddl-auto: update
     show-sql: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+app:
+  minio:
+    url: ${S3_URL:http://127.0.0.1:9000}
+    buckets:
+      security:
+        name: ${BUCKET_NAME:test}
+        access: ${BUCKET_ACCESS:user}
+        secret: ${BUCKET_SECRET:password}
+
+myapp:
+  api:
+    base-url: api/v1
