@@ -22,7 +22,7 @@ import java.security.NoSuchAlgorithmException;
 public class S3Config {
     private final S3Settings s3Settings;
 
-    private static final String BUCKET_NAME = "test";
+    public static final String BUCKET_NAME = "test";
 
     @SneakyThrows
     @Bean(name = BUCKET_NAME)
