@@ -14,6 +14,4 @@ public interface ProductService {
     ProductResponseDto updateProduct(int id, ProductRequestDto requestDto);
 
     void deleteProduct(int id);
-
-    int addImage(int id);
 }
