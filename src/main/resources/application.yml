@@ -18,8 +18,8 @@ spring:
 app:
   minio:
     url: ${S3_URL:http://127.0.0.1:9000}
-    buckets:
-      security:
+    bucketMap:
+      test:
         name: ${BUCKET_NAME:test}
         access: ${BUCKET_ACCESS:user}
         secret: ${BUCKET_SECRET:password}
