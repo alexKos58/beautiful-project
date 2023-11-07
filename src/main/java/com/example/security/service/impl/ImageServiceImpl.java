@@ -1,26 +1,25 @@
 package com.example.security.service.impl;
 
-import com.example.security.domain.entity.Image;
-import com.example.security.domain.repository.ImageRepository;
-import com.example.security.domain.repository.ProductRepository;
 import com.example.security.service.ImageService;
+import com.example.security.service.PhotoUploader;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Transactional
 @AllArgsConstructor
 public class ImageServiceImpl implements ImageService {
 
-    private final ProductRepository productRepository;
 
-    private final ImageRepository imageRepository;
+    private final PhotoUploader photoUploader;
 
-    public int addImage(int id){
-        Image image = new Image();
-        image.setProduct(productRepository.findById(id).orElseThrow());
-        imageRepository.save(image);
-        return image.getId();
+    public CompletableFuture<Integer> addImage(int productId, String fileName, MultipartFile content) {
+
+        return photoUploader.uploadPhotoAsync(productId, fileName, content);
+
     }
 }

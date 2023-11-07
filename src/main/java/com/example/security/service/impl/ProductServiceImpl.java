@@ -2,10 +2,9 @@ package com.example.security.service.impl;
 
 import com.example.security.controller.dto.request.ProductRequestDto;
 import com.example.security.controller.dto.response.ProductResponseDto;
-import com.example.security.domain.entity.Image;
 import com.example.security.domain.entity.Product;
-import com.example.security.mapper.ProductMapper;
 import com.example.security.domain.repository.ProductRepository;
+import com.example.security.mapper.ProductMapper;
 import com.example.security.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -55,12 +54,5 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(int id) {
         Product product = productRepository.findById(id).orElseThrow();
         productRepository.deleteById(product.getId());
-    }
-
-    @Transactional
-    public int addImage(int id){
-        Image image = new Image();
-        image.setProduct(productRepository.findById(id).orElseThrow());
-        return image.getId();
     }
 }
