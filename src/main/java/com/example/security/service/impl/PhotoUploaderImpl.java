@@ -4,8 +4,10 @@ import com.example.security.domain.entity.Image;
 import com.example.security.domain.repository.ImageRepository;
 import com.example.security.domain.repository.ProductRepository;
 import com.example.security.service.PhotoUploader;
+import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import io.minio.StatObjectResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,5 +52,23 @@ public class PhotoUploaderImpl implements PhotoUploader {
         }, executor);
 
         return future;
+    }
+
+    public byte[] getFile(String fileName) {
+        try {
+            MinioClient minioClient = minioClientMap.get(BUCKET_NAME);
+
+
+            // Получаем содержимое файла
+            return minioClient.getObject(
+                    GetObjectArgs.builder()
+                            .bucket(BUCKET_NAME)
+                            .object(fileName)
+                            .build()
+            ).readAllBytes();
+
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
 }

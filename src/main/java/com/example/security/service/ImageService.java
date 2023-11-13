@@ -7,4 +7,6 @@ import java.util.concurrent.CompletableFuture;
 public interface ImageService {
 
     CompletableFuture<Integer> addImage(int id, String fileName, MultipartFile content);
+
+    byte[] getFileFromMinio(String fileName);
 }

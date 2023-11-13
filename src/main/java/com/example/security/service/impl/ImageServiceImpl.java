@@ -18,8 +18,10 @@ public class ImageServiceImpl implements ImageService {
     private final PhotoUploader photoUploader;
 
     public CompletableFuture<Integer> addImage(int productId, String fileName, MultipartFile content) {
-
         return photoUploader.uploadPhotoAsync(productId, fileName, content);
+    }
 
+    public byte[] getFileFromMinio(String fileName) {
+        return photoUploader.getFile(fileName);
     }
 }

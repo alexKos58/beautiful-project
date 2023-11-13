@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +35,12 @@ public class ImageController {
             @Parameter(description = "Картинка товара") @ModelAttribute MultipartFile content
     ) {
         return imageService.addImage(productId, fileName, content);
+    }
+
+    @GetMapping
+    @Operation(summary = "Получить изображение")
+    @ResponseStatus(HttpStatus.OK)
+    public byte[] getImage(String fileName) {
+        return imageService.getFileFromMinio(fileName);
     }
 }

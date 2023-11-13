@@ -6,4 +6,6 @@ import java.util.concurrent.CompletableFuture;
 
 public interface PhotoUploader {
     CompletableFuture<Integer> uploadPhotoAsync(int productId, String fileName, MultipartFile content);
+
+    byte[] getFile(String fileName);
 }
