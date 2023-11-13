@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -17,7 +18,7 @@ public class ImageServiceImpl implements ImageService {
 
     private final PhotoUploader photoUploader;
 
-    public CompletableFuture<Integer> addImage(int productId, String fileName, MultipartFile content) {
+    public CompletableFuture<UUID> addImage(int productId, String fileName, MultipartFile content) {
         return photoUploader.uploadPhotoAsync(productId, fileName, content);
     }
 

@@ -7,7 +7,6 @@ import com.example.security.service.PhotoUploader;
 import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
-import io.minio.StatObjectResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
@@ -29,15 +29,11 @@ public class PhotoUploaderImpl implements PhotoUploader {
     private final ProductRepository productRepository;
     private final ImageRepository imageRepository;
 
-    public CompletableFuture<Integer> uploadPhotoAsync(int productId, String fileName, MultipartFile content) {
-        Image image = new Image();
-        image.setProduct(productRepository.findById(productId).orElseThrow());
-        image.setFileName(fileName);
-        imageRepository.save(image);
+    public CompletableFuture<UUID> uploadPhotoAsync(int productId, String fileName, MultipartFile content) {
+        UUID imageId = UUID.randomUUID();
 
-        CompletableFuture<Integer> future = CompletableFuture.completedFuture(image.getId());
+        CompletableFuture<UUID> future = CompletableFuture.completedFuture(imageId);
 
-        // Асинхронно загружаем файл в Минио
         CompletableFuture.runAsync(() -> {
             try {
                 MinioClient minioClient = minioClientMap.get(BUCKET_NAME);
@@ -46,8 +42,15 @@ public class PhotoUploaderImpl implements PhotoUploader {
                         .object(fileName)
                         .stream(new ByteArrayInputStream(content.getBytes()), content.getBytes().length, -1)
                         .build());
+
+                Image image = Image.builder()
+                        .id(imageId)
+                        .product(productRepository.findById(productId).orElseThrow())
+                        .fileName(fileName)
+                        .build();
+                imageRepository.save(image);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                future.completeExceptionally(e);
             }
         }, executor);
 
@@ -58,8 +61,6 @@ public class PhotoUploaderImpl implements PhotoUploader {
         try {
             MinioClient minioClient = minioClientMap.get(BUCKET_NAME);
 
-
-            // Получаем содержимое файла
             return minioClient.getObject(
                     GetObjectArgs.builder()
                             .bucket(BUCKET_NAME)

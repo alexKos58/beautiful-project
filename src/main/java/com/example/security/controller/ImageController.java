@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -29,7 +30,7 @@ public class ImageController {
     @PostMapping(value = "/add-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Добавить фотографию продукта")
     @ResponseStatus(HttpStatus.CREATED)
-    public CompletableFuture<Integer> addImage(
+    public CompletableFuture<UUID> addImage(
             @Parameter(description = "Id продукта") @RequestParam int productId,
             @Parameter(description = "Наименование файла") @RequestParam String fileName,
             @Parameter(description = "Картинка товара") @ModelAttribute MultipartFile content
