@@ -28,22 +28,27 @@ public class PhotoUploaderImpl implements PhotoUploader {
     private final ImageRepository imageRepository;
 
     public CompletableFuture<Integer> uploadPhotoAsync(int productId, String fileName, MultipartFile content) {
-        return CompletableFuture.supplyAsync(() -> {
+        Image image = new Image();
+        image.setProduct(productRepository.findById(productId).orElseThrow());
+        image.setFileName(fileName);
+        imageRepository.save(image);
+
+        CompletableFuture<Integer> future = CompletableFuture.completedFuture(image.getId());
+
+        // Асинхронно загружаем файл в Минио
+        CompletableFuture.runAsync(() -> {
             try {
-                Image image = new Image();
-                image.setProduct(productRepository.findById(productId).orElseThrow());
-                image.setFileName(fileName);
-                imageRepository.save(image);
                 MinioClient minioClient = minioClientMap.get(BUCKET_NAME);
                 minioClient.putObject(PutObjectArgs.builder()
                         .bucket(BUCKET_NAME)
                         .object(fileName)
                         .stream(new ByteArrayInputStream(content.getBytes()), content.getBytes().length, -1)
                         .build());
-                return image.getId();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }, executor);
+
+        return future;
     }
 }

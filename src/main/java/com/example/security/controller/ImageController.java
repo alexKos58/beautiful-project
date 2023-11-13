@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +25,13 @@ public class ImageController {
 
     private final ImageService imageService;
 
-    @PostMapping("/add-image")
+    @PostMapping(value = "/add-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Добавить фотографию продукта")
     @ResponseStatus(HttpStatus.CREATED)
     public CompletableFuture<Integer> addImage(
             @Parameter(description = "Id продукта") @RequestParam int productId,
             @Parameter(description = "Наименование файла") @RequestParam String fileName,
-            @Parameter(description = "Id продукта") @ModelAttribute MultipartFile content
+            @Parameter(description = "Картинка товара") @ModelAttribute MultipartFile content
     ) {
         return imageService.addImage(productId, fileName, content);
     }
