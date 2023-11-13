@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 @Setter
 @AllArgsConstructor
 @Configuration
+@Slf4j
 public class S3Config {
     private final S3Settings s3Settings;
 
@@ -52,11 +54,11 @@ public class S3Config {
                         .bucket(BUCKET_NAME)
                         .build());
             } else {
-                System.out.println("Bucket 'test' already exists.");
+                log.info("Bucket 'test' already exists.");
             }
 
         } catch (MinioException ex) {
-            ex.printStackTrace();
+            log.error(ex.getMessage());
         }
     }
 }
