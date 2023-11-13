@@ -1,9 +1,7 @@
 package com.example.security.controller;
 
 import com.example.security.controller.dto.response.OrderResponseDto;
-import com.example.security.domain.enums.Status;
 import com.example.security.service.OrderService;
-import com.example.security.service.impl.OrderServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -31,9 +29,8 @@ public class OrderController {
     @Operation(summary = "Изменение статуса заказа")
     @ResponseStatus(HttpStatus.OK)
     public OrderResponseDto editOrderStatus(
-            @Parameter(in = ParameterIn.PATH, name = "id", description = "id заказа") @PathVariable int id,
-            @Parameter(description = "Новый статус заказа") @RequestParam Status status) {
-        return orderService.editOrderStatus(id, status);
+            @Parameter(in = ParameterIn.PATH, name = "id", description = "id заказа") @PathVariable int id) {
+        return orderService.editOrderStatus(id);
     }
 
 
