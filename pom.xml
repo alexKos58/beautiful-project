@@ -19,6 +19,7 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <security-core.version>6.1.1</security-core.version>
         <lombok.version>1.18.30</lombok.version>
+        <minio.version>8.5.6</minio.version>
     </properties>
 
     <dependencies>
@@ -75,6 +76,11 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio.version}</version>
         </dependency>
     </dependencies>
 
